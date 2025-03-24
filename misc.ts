@@ -1,3 +1,7 @@
+/**
+ * A collection of miscellaneous utility functions.
+ * @module
+ */
 import { pdfToTxt as pdfrexToTxt } from "@jackfiszr/pdfrex";
 import { dlog, log } from "./logger.ts";
 import { existsSync } from "@std/fs";

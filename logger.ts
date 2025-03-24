@@ -1,3 +1,7 @@
+/**
+ * Logging utilities for Deno scripts.
+ * @module
+ */
 import { getProperty } from "./misc.ts";
 import * as stdFmt from "@std/fmt";
 import * as stdLog from "@std/log";

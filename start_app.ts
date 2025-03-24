@@ -1,3 +1,7 @@
+/**
+ * Common functions for starting an application using Oak or Hono.
+ * @module
+ */
 import type { Application } from "@oak/oak";
 import type { Hono } from "@hono/hono";
 import { log } from "./logger.ts";
