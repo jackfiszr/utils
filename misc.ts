@@ -70,7 +70,7 @@ export async function pdfToTxt(
  * @param cmdStr - The command string to be executed.
  *
  * @example
- * ```typescript
+ * ```ts
  * await runCmd("echo Hello, World!");
  * ```
  *
@@ -111,7 +111,7 @@ export function timeDiff(startTime: number, endTime: number): string {
  * - Duplicate lines (case-insensitive) are reported and removed.
  *
  * @example
- * ```typescript
+ * ```ts
  * const content = "hello\nworld\nhello\n";
  * const result = txtToCleanArr(content);
  * console.log(result); // Output: ["HELLO", "WORLD"]

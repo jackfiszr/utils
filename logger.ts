@@ -72,16 +72,20 @@ export function mlog(
  * @returns {Promise<log.Logger>} A promise that resolves to a logger instance.
  *
  * @example
+ * ```ts
  * // Setup logger with console and file handlers
  * const logger = await setupLogger('/path/to/logfile.log');
  * logger.debug('This is a debug message');
  * logger.error('This is an error message');
+ * ```
  *
  * @example
+ * ```ts
  * // Setup logger with only console handler
  * const logger = await setupLogger();
  * logger.debug('This is a debug message');
  * logger.error('This is an error message');
+ * ```
  */
 export default async function getLogger(
   logFilePath?: string,
