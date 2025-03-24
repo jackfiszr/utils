@@ -114,7 +114,8 @@ export default async function getLogger(
   if (logFilePath && logConfig.handlers) {
     logConfig.handlers.file = new stdLog.FileHandler("ERROR", {
       filename: logFilePath,
-      formatter: (_) => "{datetime} {levelName} {msg}",
+      formatter: (record) =>
+        `${record.datetime} ${record.levelName} ${record.msg}`,
     });
   }
   await stdLog.setup(logConfig);
