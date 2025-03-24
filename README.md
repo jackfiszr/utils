@@ -59,6 +59,28 @@ Starts a Hono application with the specified options.
 
 ## Test utils
 
+### `createMockPdf(filenames: string | string[], directory?: string, numPages?: number): Promise<void>`
+
+Creates one or multiple test PDFs with a specified number of pages.
+
+**Parameters:**
+
+- `filenames`: A single filename or an array of filenames to create.
+- `directory`: (Optional) Directory where the PDFs should be saved. Defaults to
+  the current working directory.
+- `numPages`: (Optional) Number of pages in each PDF. Defaults to 1.
+
+**Returns:** A promise that resolves when all PDFs are created.
+
+**Example Usage:**
+
+```typescript
+await createMockPdf("test.pdf"); // Creates a single-page PDF named test.pdf in the current directory.
+
+await createMockPdf(["file1.pdf", "file2.pdf"], "./output", 3);
+// Creates two PDFs (file1.pdf & file2.pdf) with 3 pages each in the "output" directory.
+```
+
 ## Miscellaneous
 
 ### `getProperty<T, K extends keyof T>(obj: T, key: K): T[K]`
