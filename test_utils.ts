@@ -1,3 +1,7 @@
+/**
+ * Utility functions for testing and mocking.
+ * @module
+ */
 import { PDFDocument } from "pdf-lib";
 import { ensureDirSync } from "@std/fs";
 import { join } from "@std/path";
