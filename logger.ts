@@ -87,7 +87,7 @@ export function mlog(
  * logger.error('This is an error message');
  * ```
  */
-export default async function getLogger(
+export async function getLogger(
   logFilePath?: string,
 ): Promise<stdLog.Logger> {
   const logConfig: stdLog.LogConfig = {
