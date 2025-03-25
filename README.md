@@ -29,6 +29,45 @@ formatting.
   - `text`: The message text to be logged.
   - `color`: The color to apply to the message text.
 
+### `getLogger(logFilePath?: string): Promise<stdLog.Logger>`
+
+Sets up and returns a logger instance with optional file logging.
+
+**Parameters:**
+
+- `logFilePath` (optional): A string representing the path to a log file. If
+  provided, logs with level "ERROR" and above will be written to this file.
+
+**Returns:**
+
+A promise that resolves to a `stdLog.Logger` instance configured with console
+and (optionally) file logging.
+
+**Example Usage:**
+
+```typescript
+// Setup logger with console and file handlers
+const logger = await getLogger("/path/to/logfile.log");
+logger.debug("This is a debug message");
+logger.error("This is an error message");
+```
+
+```typescript
+// Setup logger with only console handler
+const logger = await getLogger();
+logger.debug("This is a debug message");
+logger.error("This is an error message");
+```
+
+You can also import an already configured simple console-only logger instance:
+
+```typescript
+import { log } from "@jackfiszr/utils";
+
+log.info("This is an info message");
+log.error("This is an error message");
+```
+
 ## Oak and Hono app launchers
 
 ### `startOakApp(app: Application, options: StartAppOptions = {})`
