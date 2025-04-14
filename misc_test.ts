@@ -1,12 +1,13 @@
 import {
   getProperty,
+  ls,
   pdfToTxt,
   runCmd,
   timeDiff,
   txtToCleanArr,
 } from "./misc.ts";
 import { createMockPdf } from "./test_utils.ts";
-import { assertEquals, assertRejects } from "@std/assert";
+import { assertEquals, assertRejects, assertThrows } from "@std/assert";
 import { existsSync } from "@std/fs";
 
 Deno.test("getProperty should return correct property value", () => {
@@ -66,4 +67,44 @@ Deno.test("pdfToTxt should throw an error if the text file is not created", asyn
   );
 
   await cleanup();
+});
+
+Deno.test("ls - lists entries in the current directory", () => {
+  const entries = ls();
+  const expectedEntries = Array.from(Deno.readDirSync(Deno.cwd())).map((
+    entry,
+  ) => entry.name);
+  assertEquals(entries.sort(), expectedEntries.sort());
+});
+
+Deno.test("ls - lists entries in a specified directory", async () => {
+  const tempDir = await Deno.makeTempDir();
+  const filePath = `${tempDir}/testFile.txt`;
+  await Deno.writeTextFile(filePath, "test content");
+
+  const entries = ls(tempDir);
+  assertEquals(entries, ["testFile.txt"]);
+
+  await Deno.remove(tempDir, { recursive: true });
+});
+
+Deno.test("ls - throws error if directory does not exist", () => {
+  assertThrows(
+    () => {
+      ls("/non/existent/directory");
+    },
+    Deno.errors.NotFound,
+    "No such file or directory",
+  );
+});
+
+Deno.test("ls - throws error if permission is denied", () => {
+  const restrictedDir = "/root"; // Assuming this directory is restricted
+  assertThrows(
+    () => {
+      ls(restrictedDir);
+    },
+    Deno.errors.PermissionDenied,
+    "Permission denied",
+  );
 });
