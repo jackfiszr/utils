@@ -189,3 +189,22 @@ const content = "hello\nworld\nhello\n";
 const result = txtToCleanArr(content);
 console.log(result); // Output: ["HELLO", "WORLD"]
 ```
+
+### `ls(directoryPath?: string): string[]`
+
+Lists the names of all entries (files and directories) in the specified
+directory.
+
+**Parameters:**
+
+- `directoryPath`: The path to the directory to list. Defaults to the current
+  working directory if not provided.
+
+**Returns:** An array of strings representing the names of the entries in the
+directory.
+
+**Throws:**
+
+- `Deno.errors.NotFound`: If the specified directory does not exist.
+- `Deno.errors.PermissionDenied`: If the process lacks permissions to read the
+  directory.

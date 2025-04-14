@@ -140,3 +140,20 @@ export function txtToCleanArr(fileTextContent: string): string[] {
     })
     .filter(Boolean) as string[];
 }
+
+/**
+ * Lists the names of all entries (files and directories) in the specified directory.
+ * If no directory path is provided, it defaults to the current working directory.
+ *
+ * @param directoryPath - The path to the directory to list. Defaults to the current working directory if not provided.
+ * @returns An array of strings representing the names of the entries in the directory.
+ *
+ * @throws {Deno.errors.NotFound} If the specified directory does not exist.
+ * @throws {Deno.errors.PermissionDenied} If the process lacks permissions to read the directory.
+ */
+export function ls(directoryPath?: string): string[] {
+  if (!directoryPath) {
+    directoryPath = Deno.cwd();
+  }
+  return Array.from(Deno.readDirSync(directoryPath)).map((entry) => entry.name);
+}
