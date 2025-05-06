@@ -59,6 +59,27 @@ logger.debug("This is a debug message");
 logger.error("This is an error message");
 ```
 
+You can customize text formatting by passing formatting options as an additional
+argument to the logger methods:
+
+```typescript
+// A single formatting option (as a string)
+logger.debug("This is a red debug message", "red");
+
+// Multiple formatting options (as an array)
+logger.error("This is a formatted error message", [
+  "bgRed",
+  "bold",
+  "italic",
+  "underline",
+]);
+```
+
+> **Note:** Formatting options are taken from the first additional argument
+> (`args[0]`) passed to the log method. These should be valid color or style
+> functions from [`std/fmt/colors`](https://jsr.io/@std/fmt/doc/colors). A
+> single string will be wrapped into an array internally.
+
 You can also import an already configured simple console-only logger instance:
 
 ```typescript

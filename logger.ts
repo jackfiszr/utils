@@ -95,7 +95,10 @@ export async function getLogger(
       console: new stdLog.ConsoleHandler("DEBUG", {
         formatter: (logRecord) => {
           let { msg } = logRecord;
-          const fmtArr = logRecord.args[0] as [keyof typeof stdFmt];
+          const rawArg = logRecord.args[0];
+          const fmtArr = (typeof rawArg === "string" ? [rawArg] : rawArg) as [
+            keyof typeof stdFmt,
+          ];
           fmtArr?.forEach((color) => {
             const fmtFn = stdFmt[color] as FmtFn;
             msg = fmtFn(msg);
@@ -130,3 +133,46 @@ export async function getLogger(
  * @async
  */
 export const log: stdLog.Logger = await getLogger();
+
+// Usage Example
+if (import.meta.main) {
+  log.debug("This is a debug message");
+  log.error("This is an error message", "bgRed");
+  dlog({
+    color: "green",
+    title: "Info",
+    mainMsg: "This is a main message",
+    subMsg: "This is a sub message",
+    subColor: "blue",
+    subPrefix: " > ",
+  });
+  mlog([
+    { text: "This is a message", color: "red" },
+    { text: "This is another message", color: "blue" },
+    { text: "This is a third message", color: "green" },
+  ]);
+  const logger = await getLogger();
+  logger.debug("This is a debug message");
+  logger.error("This is an error message");
+  logger.info("This is an info message");
+  logger.warn("This is a warning message");
+  logger.critical("This is a critical message");
+  logger.info("This is a log message");
+  logger.info("This is a log message", "red");
+  logger.info("This is a log message", "blue");
+  logger.info("This is a log message", "green");
+  logger.info("This is a log message", "yellow");
+  logger.info("This is a log message", "cyan");
+  logger.info("This is a log message", "magenta");
+  logger.info("This is a log message", "white");
+  logger.info("This is a log message", "black");
+  logger.info("This is a log message", "gray");
+  logger.info("This is a log message", "dim");
+  logger.info("This is a log message", "bold");
+  logger.info("This is a log message", "underline");
+  logger.info("This is a log message", "inverse");
+  logger.info("This is a log message", "hidden");
+  logger.info("This is a log message", "strikethrough");
+  logger.info("This is a log message", "italic");
+  logger.info("This is a log message", ["red", "bold", "italic", "underline"]);
+}
